@@ -1,53 +1,60 @@
 .App {
-  min-height: 100vh;
-  background-color: #f5f7fb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 600px;
+  margin: 40px auto;
   font-family: Arial, sans-serif;
 }
 
-.form-card {
-  background-color: white;
-  width: 350px;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  text-align: center;
+form {
+  margin-bottom: 30px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+form div {
+  margin-bottom: 15px;
 }
 
 label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: inline-block;
+  width: 80px;
   font-weight: bold;
 }
 
 input {
-  width: 220px;
   padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 250px;
 }
 
 button {
-  width: 80px;
-  margin: 10px auto;
-  padding: 10px;
-  background-color: #2f6db5;
+  padding: 10px 20px;
+  background-color: #0077cc;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-ul {
-  text-align: left;
-  padding-left: 20px;
+.employee-list {
+  margin-top: 30px;
+}
+
+.employee-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.employee-list li {
+  margin-bottom: 10px;
+}
+
+.employee-list a {
+  color: #0077cc;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.employee-details {
+  margin-top: 30px;
+}
+
+.employee-details a {
+  color: #0077cc;
 }

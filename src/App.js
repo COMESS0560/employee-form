@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import EmployeeList from "./EmployeeList";
+import EmployeeDetails from "./EmployeeDetails";
 import "./App.css";
 
 function App() {
@@ -10,7 +13,7 @@ function App() {
   const [employee, setEmployee] = useState({
     name: "",
     email: "",
-    phone: "",
+    phone: ""
   });
 
   useEffect(() => {
@@ -20,13 +23,13 @@ function App() {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setEmployee((previousEmployee) => ({
-      ...previousEmployee,
-      [name]: value,
-    }));
+    setEmployee({
+      ...employee,
+      [name]: value
+    });
   };
 
-  const addEmployee = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     if (!employee.name || !employee.email || !employee.phone) {
@@ -34,65 +37,78 @@ function App() {
       return;
     }
 
-    setEmployees((previousEmployees) => [...previousEmployees, employee]);
+    const newEmployee = {
+      id: Date.now(),
+      name: employee.name,
+      email: employee.email,
+      phone: employee.phone
+    };
+
+    setEmployees([...employees, newEmployee]);
 
     setEmployee({
       name: "",
       email: "",
-      phone: "",
+      phone: ""
     });
   };
 
   return (
-    <div className="App">
-      <div className="form-card">
-        <h1>Add Employee</h1>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <h1>Add Employee</h1>
 
-        <form onSubmit={addEmployee}>
-          <label>
-            Name:
-            <input
-              type="text"
-              name="name"
-              value={employee.name}
-              onChange={handleChange}
-            />
-          </label>
+                <form onSubmit={handleSubmit}>
+                  <div>
+                    <label>Name: </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={employee.name}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={employee.email}
-              onChange={handleChange}
-            />
-          </label>
+                  <div>
+                    <label>Email: </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={employee.email}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-          <label>
-            Phone:
-            <input
-              type="tel"
-              name="phone"
-              value={employee.phone}
-              onChange={handleChange}
-            />
-          </label>
+                  <div>
+                    <label>Phone: </label>
+                    <input
+                      type="text"
+                      name="phone"
+                      value={employee.phone}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-          <button type="submit">Add</button>
-        </form>
+                  <button type="submit">Add</button>
+                </form>
 
-        <h2>Employee List</h2>
+                <EmployeeList employees={employees} />
+              </>
+            }
+          />
 
-        <ul>
-          {employees.map((item, index) => (
-            <li key={index}>
-              {item.name} - {item.email} - {item.phone}
-            </li>
-          ))}
-        </ul>
+          <Route
+            path="/employees/:id"
+            element={<EmployeeDetails employees={employees} />}
+          />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
